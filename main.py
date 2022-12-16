@@ -2,6 +2,10 @@ import scrapper_funcs
 import db_funcs
 
 
+def simple_print():
+    # Testing purposes only
+    print("Potato")
+
 def main():
     db_connection = db_funcs.establish_database_connection('amazon_db.db')
     db_cursor = db_funcs.create_db_cursor(db_connection)

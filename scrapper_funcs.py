@@ -31,23 +31,38 @@ def get_search_results(s_url):
 
 
 def find_rating_results(s_url):
+    num_rating = None
+    first_result_product_rating = None
+    first_result_product_title = None
     for result_item in s_url:
         first_result_product_title = result_item.h2.text
-        print(first_result_product_title)
+        # print(first_result_product_title)
         try:
             first_result_product_rating = result_item.find('i', attrs={'class': 'a-icon'})
-            print(first_result_product_rating.text)
+            # print(first_result_product_rating.text)
             num_rating = result_item.find('span', {'class': 'a-size-base s-underline-text'})
-            print(num_rating.text)
+            # print(num_rating.text)
         except AttributeError:
             print('No Product Rating')
+    return first_result_product_title, first_result_product_rating.text, num_rating.text
 
 
 def find_pricing_results(s_url):
+    full_price = None
     for result_item in s_url:
         try:
             integer_price = result_item.find('span', {'class': 'a-price-whole'})
             cent_price = result_item.find('span', {'class': 'a-price-fraction'})
-            print(integer_price.text + cent_price.text)
+            full_price = integer_price.text + cent_price.text
+            # print(full_price)
         except AttributeError:
             print('No Product Price')
+    return full_price
+
+
+def show_results():
+    search_url = find_base_url('over ear headphones')
+    search_results = get_search_results(search_url)
+    rating_data = find_rating_results(search_results)
+    item_price = find_pricing_results(search_results)
+    return rating_data[0], rating_data[1], rating_data[2], item_price

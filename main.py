@@ -14,5 +14,3 @@ if __name__ == '__main__':
     # print(search_results)
     scrapper_funcs.find_rating_results(search_results)
     scrapper_funcs.find_pricing_results(search_results)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

@@ -13,7 +13,7 @@ def main():
     db_funcs.set_up_tables(db_cursor)
 
     result_list = scrapper_funcs.show_results()
-    print(f'{result_list} test variable')
+    print({result_list})
 
     db_cursor.execute('''INSERT INTO Over_Ear_Headphones VALUES(?, ?, ?, ?, ?)''',
                       ('Headphones', 4.5, 10000, 19.99, 'https://www.amazon.com/'))

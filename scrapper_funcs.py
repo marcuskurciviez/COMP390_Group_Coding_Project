@@ -26,7 +26,7 @@ def get_search_results(s_url):
     search_results = b_soup_obj.find_all('div', attrs={'class': 's-result-item', 'data-component-type': 's-search-result'})
     # print(type(search_results))
     # print(search_results[0])
-    # print(len(search_results))
+    print(len(search_results))
     return search_results
 
 
@@ -63,6 +63,7 @@ def find_pricing_results(s_url):
 def show_results():
     search_url = find_base_url('over ear headphones')
     search_results = get_search_results(search_url)
-    rating_data = find_rating_results(search_results)
-    item_price = find_pricing_results(search_results)
-    return rating_data[0], rating_data[1], rating_data[2], item_price
+    for item in search_results:
+        rating_data = find_rating_results(item)
+        item_price = find_pricing_results(item)
+        print(rating_data, item_price)

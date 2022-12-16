@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="92c873cf-fc26-4cf0-8161-a2f95f527bbc" name="Changes" comment="Has testing print function">
+    <list default="true" id="92c873cf-fc26-4cf0-8161-a2f95f527bbc" name="Changes" comment="I was working on cleaning up a bit of the scrapper code. I did this by putting the previous function calls into one whole function and simply call that function to make the main less cluttered. I also was able to figure out how to get all the info: product name, star rating, number of reviews, and price in one line.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/amazon_db.db" beforeDir="false" afterPath="$PROJECT_DIR$/amazon_db.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -118,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671213098768</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="I was working on cleaning up a bit of the scrapper code. I did this by putting the previous function calls into one whole function and simply call that function to make the main less cluttered. I also was able to figure out how to get all the info: product name, star rating, number of reviews, and price in one line.">
+      <created>1671216446457</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671216446457</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +146,7 @@
     <MESSAGE value="added a .gitignore, just removed an extra line at the bottom." />
     <MESSAGE value="updated project" />
     <MESSAGE value="Has testing print function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Has testing print function" />
+    <MESSAGE value="I was working on cleaning up a bit of the scrapper code. I did this by putting the previous function calls into one whole function and simply call that function to make the main less cluttered. I also was able to figure out how to get all the info: product name, star rating, number of reviews, and price in one line." />
+    <option name="LAST_COMMIT_MESSAGE" value="I was working on cleaning up a bit of the scrapper code. I did this by putting the previous function calls into one whole function and simply call that function to make the main less cluttered. I also was able to figure out how to get all the info: product name, star rating, number of reviews, and price in one line." />
   </component>
 </project>

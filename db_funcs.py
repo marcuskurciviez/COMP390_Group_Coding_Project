@@ -1,5 +1,6 @@
 """ This module assists with functions relating to the database"""
 import sqlite3
+import scrapper_funcs
 
 
 def establish_database_connection(db_name: str):
@@ -117,3 +118,25 @@ def commit_and_close(db_connection: sqlite3.Connection, db_cursor: sqlite3.Curso
         print('Changes committed and connection/cursor closed successfully, program finished!')
     except sqlite3.Error as db_error:
         print(f'An error occurred while committing connection and closing cursor: {db_error}')
+
+
+def insert_values_into_table(db_cursor: sqlite3.Cursor, search_term: str, data: tuple):
+    if search_term == '1080p webcams':
+        table_name = 'webcams'
+    else:
+        table_name = search_term.replace(' ', '_')
+    db_cursor.execute(f'''INSERT INTO {table_name} VALUES(?, ?, ?, ?, ?)''',
+                      (data[0], data[1], data[2], data[3], data[4]))
+
+
+def fill_tables(db_cursor: sqlite3.Cursor, search_term: str):
+    listing_counter = 0
+    url_results_page_param = 1
+    while listing_counter < 300:
+        search_page_url = scrapper_funcs.find_base_url(search_term, url_results_page_param)
+        search_results = scrapper_funcs.show_results_for_page(search_page_url)
+        for listing in search_results:
+            listing_counter += 1
+            db_table_row_data = scrapper_funcs.extract_info(listing)
+            insert_values_into_table(db_cursor, search_term, tuple(db_table_row_data))
+        url_results_page_param += 1

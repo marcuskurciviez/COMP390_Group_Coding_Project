@@ -1,6 +1,7 @@
 import db_funcs
 import scrapper_funcs
 
+
 def main():
     db_connection = db_funcs.establish_database_connection('amazon_db.db')
     db_cursor = db_funcs.create_db_cursor(db_connection)

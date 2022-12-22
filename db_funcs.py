@@ -144,3 +144,17 @@ def fill_tables(db_cursor: sqlite3.Cursor, search_term: str):
             db_table_row_data = scrapper_funcs.extract_info(item)
             insert_values_into_table(db_cursor, search_term, tuple(db_table_row_data))
         page += 1
+
+
+def query(db_cursor: sqlite3.Cursor, query_str):
+    f = open("results.txt", "w")
+    f.write(query_str)
+    print(query_str)
+    db_cursor.execute(f'''{query_str}''')
+    output = db_cursor.fetchall()
+    for item in output:
+        print(item)
+        print("")
+        f.write(f"\n{item}")
+    f.close()
+

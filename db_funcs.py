@@ -147,9 +147,14 @@ def fill_tables(db_cursor: sqlite3.Cursor, search_term: str):
 
 
 def query(db_cursor: sqlite3.Cursor, query_str):
+    f = open("results.txt", "w")
+    f.write(query_str)
     print(query_str)
     db_cursor.execute(f'''{query_str}''')
     output = db_cursor.fetchall()
     for item in output:
         print(item)
         print("")
+        f.write(f"\n{item}")
+    f.close()
+

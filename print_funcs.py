@@ -7,7 +7,7 @@ def opening_statement():
         try:
             product_category = int(input(
                 "Choose a product category: \n 1. Over Ear Headphones \n 2. USB Microphones \n 3. 1080p Webcams \n"
-                " 4. Capture Cards \n 5. 8-channel Audio Mixers 6. Gaming Laptops \n"))
+                " 4. Capture Cards \n 5. 8-channel Audio Mixers \n 6. Gaming Laptops \n"))
         except ValueError:
             print("Please enter a valid number 1-6")
             continue

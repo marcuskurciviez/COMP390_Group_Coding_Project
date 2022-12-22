@@ -10,6 +10,9 @@ GET_REQUEST_HEADER = (
 )
 
 
+"""find_base_url serves the purpose of taking in a number of parameters and has the amazon base URL with the
+beginning part, as well as a replace command to raplace spaces in the text with a + sign. As well as adds 
+a page_parameter variable for each page number."""
 def find_base_url(keywords: str, page_num: int):
     base_url = 'https://www.amazon.com/s?k='
     search_keywords = keywords.replace(' ', '+')
@@ -19,6 +22,7 @@ def find_base_url(keywords: str, page_num: int):
     # print(search_url)
 
 
+"""Issues a GET request, using the html attributes."""
 def get_search_results(s_url):
     # issue GET request
     response_obj = get_request(s_url)
@@ -32,6 +36,8 @@ def get_search_results(s_url):
     return search_results
 
 
+"""Scrapper function to find the rating result from the Amazon webpage, uses a try/ except block for pulling the html
+attributes from the page."""
 def find_rating_results(s_url):
     num_rating = None
     first_result_product_rating = None
@@ -69,9 +75,9 @@ def show_results_for_page(search_url: str):
     return search_results
 
 
+"""attempts a GET request to the URL passed as a parameter, uses try/except block to catch errors
+returns a response object if successful, otherwise returns None"""
 def _safe_get_request(url: str):
-    """attempts a GET request to the URL passed as a parameter, uses try/except block to catch errors
-    returns a response object if successful, otherwise returns None"""
     response = None
     try:
         response = requests.get(url, headers=GET_REQUEST_HEADER)
@@ -82,9 +88,8 @@ def _safe_get_request(url: str):
         return response
 
 
-def get_request(url: str):
-    """ attempts GET request on the URL passed as a parameter and reports status
-        returns a response object"""
+"""attempts GET request on the URL passed as a parameter and reports status returns a response object"""
+def get_request(url: str):"
     response = _safe_get_request(url)
     if response is None:
         print(f'GET request error! No response object.')
@@ -97,6 +102,8 @@ def get_request(url: str):
         return response
 
 
+"""Extracts the product name and will return the name and print it to the database, if none is found then it will 
+print an erorr message."""
 def extract_product_name(listing):
     try:
         return find_rating_results(listing)[0]
@@ -104,6 +111,8 @@ def extract_product_name(listing):
         print('No product name')
 
 
+"""Extracts the product rating from the scrapper function find_rating_results. Will return the rating results, if none
+is found then an error message will print."""
 def extract_product_rating(listing):
     try:
         return find_rating_results(listing)[1][:3]
@@ -111,6 +120,7 @@ def extract_product_rating(listing):
         print('No product rating')
 
 
+"""extracts the number of ratings for a listing, if none is found then no product ratings is outputted."""
 def extract_num_ratings(listing):
     try:
         ratings = find_rating_results(listing)[2]
@@ -122,6 +132,8 @@ def extract_num_ratings(listing):
         print('No product ratings')
 
 
+"""Try except format for finding the pricing list results, if none is found then no product price is outputted into 
+terminal."""
 def extract_product_price(listing):
     try:
         return find_pricing_results(listing)
@@ -129,6 +141,7 @@ def extract_product_price(listing):
         print('No product price')
 
 
+"""Extracts the product URL in a try except layout, if no URL is found it will throw an error message."""
 def extract_product_url(listing):
     try:
         return find_rating_results(listing)[3]
@@ -136,6 +149,7 @@ def extract_product_url(listing):
         print('No product url')
 
 
+"""Extracts the info from the several functions, and puts them in a variable for the database rows."""
 def extract_info(listing):
     db_table_row_data = [None, None, None, None, None]
     db_table_row_data[0] = extract_product_name(listing)

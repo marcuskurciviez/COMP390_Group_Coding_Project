@@ -42,12 +42,3 @@ def convert_string_to_numerical(in_string):
         return float(in_string)
     return None
 
-
-def test_convert_string_to_numerical(in_string):
-    """ this function converts a string to a numerical value (to either an int or float)
-        'None' is returned if the incoming string is not in the form of an int or float """
-    if _string_is_int(in_string):
-        return int(in_string)
-    elif _string_is_float(in_string):
-        return float(in_string)
-    return None

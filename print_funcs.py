@@ -61,6 +61,7 @@ def target_price():
 def equality_operator():
     operator_list = [">", "<", ">=", "<=", "="]
     operator = input("Choose an equality operator (>, <, >=, <=, =): ")
+    print(operator)
     if operator_list.lower() in operator_list:
         print("test")
     else:

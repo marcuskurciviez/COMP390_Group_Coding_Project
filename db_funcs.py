@@ -123,8 +123,6 @@ def commit_and_close(db_connection: sqlite3.Connection, db_cursor: sqlite3.Curso
 def insert_values_into_table(db_cursor: sqlite3.Cursor, search_term: str, data: tuple):
     if search_term == '1080p webcams':
         table_name = 'webcams'
-    elif search_term == '8-channel audio mixers':
-        table_name = 'Audio_Mixers'
     else:
         table_name = search_term.replace(' ', '_')
     db_cursor.execute(f'''INSERT INTO {table_name} VALUES(?, ?, ?, ?, ?)''',
@@ -132,15 +130,13 @@ def insert_values_into_table(db_cursor: sqlite3.Cursor, search_term: str, data: 
 
 
 def fill_tables(db_cursor: sqlite3.Cursor, search_term: str):
-    counter = 0
-    page = 1
-    while counter < 300:
-        url = scrapper_funcs.find_base_url(search_term, page)
-        search_results = scrapper_funcs.show_results_for_page(url)
-        for item in search_results:
-            counter += 1
-            if counter > 300:
-                break
-            db_table_row_data = scrapper_funcs.extract_info(item)
+    listing_counter = 0
+    url_results_page_param = 1
+    while listing_counter < 300:
+        search_page_url = scrapper_funcs.find_base_url(search_term, url_results_page_param)
+        search_results = scrapper_funcs.show_results_for_page(search_page_url)
+        for listing in search_results:
+            listing_counter += 1
+            db_table_row_data = scrapper_funcs.extract_info(listing)
             insert_values_into_table(db_cursor, search_term, tuple(db_table_row_data))
-        page += 1
+        url_results_page_param += 1

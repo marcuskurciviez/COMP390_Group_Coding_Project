@@ -36,7 +36,6 @@ def find_rating_results(s_url):
     num_rating = None
     first_result_product_rating = None
     first_result_product_title = None
-    url = None
     for result_item in s_url:
         first_result_product_title = result_item.h2.text
         # print(first_result_product_title)
@@ -106,18 +105,14 @@ def extract_product_name(listing):
 
 def extract_product_rating(listing):
     try:
-        return find_rating_results(listing)[1][:3]
+        return find_rating_results(listing)[1]
     except AttributeError:
         print('No product rating')
 
 
 def extract_num_ratings(listing):
     try:
-        ratings = find_rating_results(listing)[2]
-        if ratings[:1] == '(':
-            return ratings[1:-1]
-        else:
-            return ratings
+        return find_rating_results(listing)[2]
     except AttributeError:
         print('No product ratings')
 

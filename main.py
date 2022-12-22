@@ -4,6 +4,9 @@ import db_funcs
 import print_funcs
 
 
+"""The main function establishes a connection to the database, as well as create a cursor to creat and set
+up the tables for each of the search terms. It goes through a for loop for each search term and fills the table
+with the appropriate data. After fill is done it will commit and close the database connection."""
 def main():
     db_connection = db_funcs.establish_database_connection('amazon_db.db')
     db_cursor = db_funcs.create_db_cursor(db_connection)
@@ -16,6 +19,8 @@ def main():
     db_funcs.commit_and_close(db_connection, db_cursor)
 
 
+"""The query function is used for the terminal print statements if the user would like to execute another
+query or not. If user says no then the program will exit and quit. """
 def query(db_cursor: sqlite3.Cursor):
     cont = input('Would you like to execute a query (y/n):')
     while cont == 'y':
@@ -26,6 +31,8 @@ def query(db_cursor: sqlite3.Cursor):
         print('Exiting program...')
 
 
+"""The get_input function is connected to the print_funcs file where all the user 
+input handling is going on. Stores each function into a variable to store user input."""
 def get_input():
     category = print_funcs.opening_statement()
     target_star = print_funcs.target_star_review()

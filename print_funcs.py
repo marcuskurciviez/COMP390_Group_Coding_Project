@@ -2,6 +2,9 @@
 import math
 
 
+"""Serves as the opening statement where user can select a number from 1-6. It is formatted in a while loop where
+if the user enters a number within range it will continue on, if not it will loop back to the product category
+telling the user to enter a number between 1-6."""
 def opening_statement():
     while True:
         try:
@@ -19,6 +22,8 @@ def opening_statement():
             opening_statement()
 
 
+"""Serves purpose for the target star review where user can enter a number from 0-5, and will retrieve an error
+if number is bigger than 5 or less than 0."""
 def target_star_review():
     while True:
         try:
@@ -34,6 +39,8 @@ def target_star_review():
             target_star_review()
 
 
+"""User can enter a target number of reviews, since there really is no cap on a number of reviews, the function
+uses .inf for an infinite number but no less than 0."""
 def target_reviews():
     while True:
         try:
@@ -48,6 +55,8 @@ def target_reviews():
             target_reviews()
 
 
+"""Same with the function above, user can input a price point that has virtually no cap on the max number since
+the price can range from 0 to a really high number."""
 def target_price():
     while True:
         try:
@@ -62,6 +71,8 @@ def target_price():
             target_price()
 
 
+"""This function has an operator_list with a list of the different operator, user can only input one of the listed
+operators that are shown in the list. If not it will print an error message and loop back to the equality operator."""
 def equality_operator():
     operator_list = [">", "<", ">=", "<=", "="]
     operator = input("Choose an equality operator (>, <, >=, <=, =): ")
@@ -72,6 +83,8 @@ def equality_operator():
         equality_operator()
 
 
+"""Openinging print statement that takes in a number of parameters for each user input. After all is done, it will
+return a SQL select statement that will be used for filtering the data."""
 def print_statement(category, eq1, targ_star, eq2, targ_rev, eq3, targ_price):
     table_name_dict = {
         "1": "Over_Ear_Headphones",

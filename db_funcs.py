@@ -3,6 +3,9 @@ import sqlite3
 import scrapper_funcs
 
 
+"""Establish_database_connection provides the necessary information to set up a connection with the
+database in a try except format. If database fails to establish then an error message will occur. 
+If successful then it will print out the appropriate statement for a successful connection."""
 def establish_database_connection(db_name: str):
     """ attempts to establish a connection to the database, returns connection object or None if unsuccessful """
     db_connection = None
@@ -15,6 +18,8 @@ def establish_database_connection(db_name: str):
         return db_connection
 
 
+"""create_db_cursor serves the purpose of making the database cursor object. It is in the format of a
+try except where it will print a successful message if successful, or an error message if not successful."""
 def create_db_cursor(db_connection: sqlite3.Connection):
     """creates a cursor object on the database from the given connection. Returns the cursor, or None if not created"""
     db_cursor = None
@@ -30,6 +35,9 @@ def create_db_cursor(db_connection: sqlite3.Connection):
         return db_cursor
 
 
+"""This table has the purpose of creating the table for the headphones table. Goes through the execute command
+and will create a table if it does not exist already with the appropriate values of product_name, rating,
+num_ratings, price, and product URL."""
 def create_headphones_table(db_cursor: sqlite3.Cursor):
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS Over_Ear_Headphones(
                                            product_name TEXT,
@@ -39,6 +47,9 @@ def create_headphones_table(db_cursor: sqlite3.Cursor):
                                            product_url TEXT);''')
 
 
+"""This table has the purpose of creating the table for the microphones table. Goes through the execute command
+and will create a table if it does not exist already with the appropriate values of product_name, rating,
+num_ratings, price, and product URL."""
 def create_microphones_table(db_cursor: sqlite3.Cursor):
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS USB_Microphones(
                                             product_name TEXT,
@@ -48,6 +59,9 @@ def create_microphones_table(db_cursor: sqlite3.Cursor):
                                             product_url TEXT);''')
 
 
+"""This table has the purpose of creating the table for the webcams table. Goes through the execute command
+and will create a table if it does not exist already with the appropriate values of product_name, rating,
+num_ratings, price, and product URL."""
 def create_webcams_table(db_cursor: sqlite3.Cursor):
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS Webcams(
                                             product_name TEXT,
@@ -57,6 +71,9 @@ def create_webcams_table(db_cursor: sqlite3.Cursor):
                                             product_url TEXT);''')
 
 
+"""This table has the purpose of creating the table for the capture cards table. Goes through the execute command
+and will create a table if it does not exist already with the appropriate values of product_name, rating,
+num_ratings, price, and product URL."""
 def create_capture_cards_table(db_cursor: sqlite3.Cursor):
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS Capture_Cards(
                                            product_name TEXT,
@@ -66,6 +83,9 @@ def create_capture_cards_table(db_cursor: sqlite3.Cursor):
                                            product_url TEXT);''')
 
 
+"""This table has the purpose of creating the table for the audio mixers table. Goes through the execute command
+and will create a table if it does not exist already with the appropriate values of product_name, rating,
+num_ratings, price, and product URL."""
 def create_audio_mixers_table(db_cursor: sqlite3.Cursor):
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS Audio_Mixers(
                                             product_name TEXT,
@@ -75,6 +95,9 @@ def create_audio_mixers_table(db_cursor: sqlite3.Cursor):
                                             product_url TEXT);''')
 
 
+"""This table has the purpose of creating the table for the gaming laptops table. Goes through the execute command
+and will create a table if it does not exist already with the appropriate values of product_name, rating,
+num_ratings, price, and product URL."""
 def create_gaming_laptops_table(db_cursor: sqlite3.Cursor):
     db_cursor.execute('''CREATE TABLE IF NOT EXISTS Gaming_Laptops(
                                                    product_name TEXT,
@@ -84,6 +107,8 @@ def create_gaming_laptops_table(db_cursor: sqlite3.Cursor):
                                                    product_url TEXT);''')
 
 
+"""The purpose for this function is to delete the data from the tables listed above, if the data is already 
+inserted into the program from the last time is was ran."""
 def clear_tables(db_cursor: sqlite3.Cursor):
     # clear the tables if it already has data from the last time the program was run
     db_cursor.execute('DELETE FROM Over_Ear_Headphones')
@@ -94,8 +119,8 @@ def clear_tables(db_cursor: sqlite3.Cursor):
     db_cursor.execute('DELETE FROM Gaming_Laptops')
 
 
+""" creates the tables we will put our products into, or if the table exists deletes current values"""
 def set_up_tables(db_cursor: sqlite3.Cursor):
-    """ creates the tables we will put our products into, or if the table exists deletes current values"""
     try:
         create_headphones_table(db_cursor)
         create_microphones_table(db_cursor)
@@ -109,8 +134,8 @@ def set_up_tables(db_cursor: sqlite3.Cursor):
         print(f'An error occurred while trying to set up tables: {db_error}')
 
 
-def commit_and_close(db_connection: sqlite3.Connection, db_cursor: sqlite3.Cursor):
     """commits, changes, and closes the connection/cursor"""
+def commit_and_close(db_connection: sqlite3.Connection, db_cursor: sqlite3.Cursor):
     try:
         db_connection.commit()
         db_cursor.close()
@@ -146,6 +171,8 @@ def fill_tables(db_cursor: sqlite3.Cursor, search_term: str):
         page += 1
 
 
+"""The query function serves the purpose of creating a text document with the results from the database 
+with the user filtering and printing it to the created document."""
 def query(db_cursor: sqlite3.Cursor, query_str):
     f = open("results.txt", "w")
     f.write(query_str)

@@ -6,7 +6,7 @@ def opening_statement():
     product_category = 0
     while True:
         try:
-            product_category = int(input("1. Over Ear Headphones \n 2. USB Microphones \n 3. 1080p Webcams \n"
+            product_category = int(input("Choose a product category: \n 1. Over Ear Headphones \n 2. USB Microphones \n 3. 1080p Webcams \n"
                                          "4. Capture Cards \n 5. 8-channel Audio Mixers 6. Gaming Laptops \n"))
         except ValueError:
             print("Please enter a valid number 1-6")
@@ -65,3 +65,5 @@ def equality_operator():
         print("test")
     else:
         print("You did not enter a correct equality operator.")
+
+print(opening_statement())

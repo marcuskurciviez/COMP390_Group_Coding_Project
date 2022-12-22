@@ -12,6 +12,7 @@ def opening_statement():
             print("Please enter a valid number 1-6")
             continue
         if 1 <= product_category <= 6:
+            print(product_category)
             target_star_review()
         else:
             print('Please enter a valid number 1-6')
@@ -25,7 +26,7 @@ def target_star_review():
         except ValueError:
             print("Please enter a target star review between 0.0 and 5.0")
         if 0.0 <= star_rev <= 5.0:
-            target_reviews()
+            equality_operator1()
         else:
             print('Please enter a target star review between 0.0 and 5.0.')
 
@@ -39,7 +40,7 @@ def target_reviews():
             print("You did not enter a number.")
             continue
         if 0 <= reviews <= math.inf:
-            target_price()
+            equality_operator2()
         else:
             print('Please enter a positive number.')
 
@@ -53,21 +54,35 @@ def target_price():
             print("You did not enter a price.")
             continue
         if 0 <= price <= math.inf:
-            equality_operator()
+            equality_operator3()
         else:
             print('Please enter a target price.')
 
+operator_list = [">", "<", ">=", "<=", "="]
+def equality_operator1():
+    operator1 = input("Choose an equality operator: ")
+    if operator1.lower() in operator_list:
+        target_reviews()
+    else:
+        print("You did not enter a correct equality operator.")
 
-def equality_operator():
-    operator_list = [">", "<", ">=", "<=", "="]
-    operator = input("Choose an equality operator: ")
-    if operator.lower() in operator_list:
-        print("test")
+def equality_operator2():
+    operator2 = input("Choose an equality operator: ")
+    if operator2.lower() in operator_list:
+        target_price()
+    else:
+        print("You did not enter a correct equality operator.")
+
+def equality_operator3():
+    operator3 = input("Choose an equality operator: ")
+    if operator3.lower() in operator_list:
+        print_statement()
     else:
         print("You did not enter a correct equality operator.")
 
 
-def print_statements():
-    print(opening_statement())
+def print_statement():
 
-print(print_statements())
+    print("SELECT * FROM " + opening_statement() + "WHERE rating " + equality_operator1() + target_star_review(). + "AND num_ratings " + equality_operator2() + target_reviews() + "AND price " + equality_operator3() + target_price())
+
+print(print_statement())

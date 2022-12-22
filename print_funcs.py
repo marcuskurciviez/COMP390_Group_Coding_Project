@@ -2,37 +2,39 @@
 import math
 
 
-def opening_statement(product_category):
-    product_category = 0
+def opening_statement():
     while True:
         try:
-            product_category = int(input("Choose a product category: \n 1. Over Ear Headphones \n 2. USB Microphones \n 3. 1080p Webcams \n"
-                                         "4. Capture Cards \n 5. 8-channel Audio Mixers 6. Gaming Laptops \n"))
+            product_category = int(input(
+                "Choose a product category: \n 1. Over Ear Headphones \n 2. USB Microphones \n 3. 1080p Webcams \n"
+                " 4. Capture Cards \n 5. 8-channel Audio Mixers 6. Gaming Laptops \n"))
         except ValueError:
             print("Please enter a valid number 1-6")
             continue
         if 1 <= product_category <= 6:
             print(product_category)
-            target_star_review()
+            return product_category
         else:
             print('Please enter a valid number 1-6')
+            opening_statement()
 
 
-def target_star_review(star_rev):
-    star_rev = 0
+def target_star_review():
     while True:
         try:
             star_rev = float(input("Enter a target star review (ex. '4.5'): "))
         except ValueError:
             print("Please enter a target star review between 0.0 and 5.0")
+            continue
         if 0.0 <= star_rev <= 5.0:
-            equality_operator1()
+            print(star_rev)
+            return star_rev
         else:
             print('Please enter a target star review between 0.0 and 5.0.')
+            target_star_review()
 
 
-def target_reviews(reviews):
-    reviews = 0
+def target_reviews():
     while True:
         try:
             reviews = int(input("Enter a target number of reviews (ex. (\'1000\'):"))
@@ -40,13 +42,13 @@ def target_reviews(reviews):
             print("You did not enter a number.")
             continue
         if 0 <= reviews <= math.inf:
-            equality_operator2()
+            return reviews
         else:
             print('Please enter a positive number.')
+            target_reviews()
 
 
-def target_price(price):
-    price = 0
+def target_price():
     while True:
         try:
             price = float(input("Enter a target price (ex. \'59.99\'): "))
@@ -54,35 +56,30 @@ def target_price(price):
             print("You did not enter a price.")
             continue
         if 0 <= price <= math.inf:
-            equality_operator3()
+            return price
         else:
             print('Please enter a target price.')
+            target_price()
 
-operator_list = [">", "<", ">=", "<=", "="]
-def equality_operator1(operator1):
-    operator1 = input("Choose an equality operator: ")
-    if operator1.lower() in operator_list:
-        target_reviews()
+
+def equality_operator():
+    operator_list = [">", "<", ">=", "<=", "="]
+    operator = input("Choose an equality operator (>, <, >=, <=, =): ")
+    if operator.lower() in operator_list:
+        return operator
     else:
         print("You did not enter a correct equality operator.")
-
-def equality_operator2(operator2):
-    operator2 = input("Choose an equality operator: ")
-    if operator2.lower() in operator_list:
-        target_price()
-    else:
-        print("You did not enter a correct equality operator.")
-
-def equality_operator3(operator3):
-    operator3 = input("Choose an equality operator: ")
-    if operator3.lower() in operator_list:
-        print_statement()
-    else:
-        print("You did not enter a correct equality operator.")
+        equality_operator()
 
 
-def print_statement():
-
-    print("SELECT * FROM " + opening_statement() + "WHERE rating " + equality_operator1() + target_star_review() + "AND num_ratings " + equality_operator2() + target_reviews() + "AND price " + equality_operator3() + target_price())
-
-print(print_statement())
+def print_statement(category, eq1, targ_star, eq2, targ_rev, eq3, targ_price):
+    table_name_dict = {
+        "1": "Over_Ear_Headphones",
+        "2": "USB_Microphones",
+        "3": "Webcams",
+        "4": "CaptureCards",
+        "5": "Audio_Mixers",
+        "6": "Gaming_Laptops"
+    }
+    return("SELECT * FROM " + table_name_dict[category] + " WHERE rating " + eq1 + " " + str(
+        targ_star) + " AND num_ratings " + eq2 + " " + str(targ_rev) + " AND price " + eq3 + " " + str(targ_price))

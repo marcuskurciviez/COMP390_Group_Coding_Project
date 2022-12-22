@@ -89,7 +89,7 @@ def _safe_get_request(url: str):
 
 
 """attempts GET request on the URL passed as a parameter and reports status returns a response object"""
-def get_request(url: str):"
+def get_request(url: str):
     response = _safe_get_request(url)
     if response is None:
         print(f'GET request error! No response object.')

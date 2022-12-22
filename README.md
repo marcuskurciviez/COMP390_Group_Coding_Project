@@ -1,7 +1,7 @@
 # COMP390 - 002 Software Engineering
 ## Group Coding Project
 ##### Members: Kaue Gabrie-Dasilva, Marcus Kurciviez, Brogan Wright
-##### Repo URL: 
+##### Repo URL: https://github.com/marcuskurciviez/COMP390_Group_Coding_Project
 ##### Third-Party Libraries Installed: sqlite3, pytest, StringIO, TempDirectory, requests, BeautifulSoup
 ##### Overview: This project covers an Amazon scraping demo, where the user will be able to provide a set number of parameters for a specific product category. The output will show you the list of results based on the parameters, and will write it to a text file for easy printing and sharing. 
 ##### Instructions for Use: 
